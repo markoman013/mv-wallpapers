@@ -1,0 +1,55 @@
+name: Process wallpapers
+
+# Runs whenever images are added, renamed or deleted under wallpapers/.
+# Optimizes new images (max 3840px wide, JPEG, clean names) and rebuilds
+# manifest.json, which the MV Wallpapers Plugin reads.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "wallpapers/**"
+      - "scripts/process_wallpapers.py"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: wallpapers
+  cancel-in-progress: false
+
+jobs:
+  process:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # full history: "recently added" dates come from it
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Pillow
+        run: pip install --quiet Pillow
+
+      - name: Optimize, rebuild manifest and push (retries on newer commits)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for i in 1 2 3 4 5; do
+            git fetch --quiet origin main
+            git reset --quiet --hard origin/main
+            python scripts/process_wallpapers.py
+            git add -A wallpapers thumbs manifest.json
+            if git diff --cached --quiet; then
+              echo "Nothing to commit."
+              exit 0
+            fi
+            git commit --quiet -m "Optimize wallpapers and update manifest"
+            git push origin HEAD:main && exit 0
+            echo "Someone pushed meanwhile - redoing on top of it."
+            sleep 10
+          done
+          exit 1

@@ -1,0 +1,76 @@
+name: Fetch art candidates
+
+# Downloads public-domain images (The Met, National Gallery of Art, NASA), wide and 1080p+
+# after a 16:9 crop, to a "candidates-<sources>" branch for review. Nothing goes into the
+# collection from here. Run again with "delete" to remove the candidates branch.
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: fetch, or delete (removes the candidates branch)
+        default: fetch
+      sources:
+        description: met, nga, nasa, wikimedia, esa (comma-separated)
+        default: met,nga
+      met_queries:
+        description: Met search words, comma-separated (empty = broad searches that cover all paintings)
+        default: ""
+      met_max:
+        description: Most Met paintings to keep (0 = all)
+        default: "0"
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    if: inputs.action == 'fetch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pillow
+      - name: NGA open data
+        if: contains(inputs.sources, 'nga')
+        run: |
+          git clone -q --depth 1 --filter=blob:none --sparse https://github.com/NationalGalleryOfArt/opendata nga
+          git -C nga sparse-checkout set data
+      - run: python scripts/fetch_art.py
+        env:
+          SOURCES: ${{ inputs.sources }}
+          MET_QUERIES: ${{ inputs.met_queries }}
+          MET_MAX: ${{ inputs.met_max }}
+      - name: Push to the candidates branch
+        run: |
+          cd candidates
+          branch="candidates-$(echo '${{ inputs.sources }}' | tr ',' '-')"
+          git init -q -b "$branch"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          url="https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}"
+          # Push in batches of 300 files (GitHub refuses a single push over 2 GB).
+          find . -name '*.jpg' -not -path './.git/*' | sort | split -l 300 - /tmp/batch.
+          n=0
+          for b in /tmp/batch.*; do
+            n=$((n+1))
+            xargs -d '\n' git add < "$b"
+            git commit -q -m "Art candidates, part $n"
+            git push -q -f "$url" "$branch"
+          done
+
+  delete:
+    if: inputs.action == 'delete'
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          for b in $(gh api "repos/${{ github.repository }}/git/matching-refs/heads/candidates" -q '.[].ref' | sed 's|refs/heads/||'); do
+            gh api -X DELETE "repos/${{ github.repository }}/git/refs/heads/$b" || true
+          done
+        env:
+          GH_TOKEN: ${{ github.token }}

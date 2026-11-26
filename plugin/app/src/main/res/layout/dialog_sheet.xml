@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Material 3 side sheet (same look as the settings panel). -->
+<com.mv.wallpapers.plugin.BlurBar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sheetRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/panel_bg"
+    android:orientation="vertical"
+    android:paddingLeft="28dp"
+    android:paddingTop="27dp"
+    android:paddingRight="28dp"
+    android:paddingBottom="20dp">
+
+    <TextView
+        android:id="@+id/heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_primary"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/subheading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:singleLine="true"
+        android:ellipsize="middle"
+        android:textColor="@color/text_secondary"
+        android:textSize="12sp" />
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+        android:divider="@null"
+        android:dividerHeight="6dp"
+        android:listSelector="@drawable/row_selector"
+        android:scrollbars="none" />
+</com.mv.wallpapers.plugin.BlurBar>

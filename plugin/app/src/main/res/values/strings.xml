@@ -1,0 +1,10 @@
+<resources>
+    <string name="plugin_name">MV Wallpapers</string>
+    <string name="app_name">MV Wallpapers Plugin</string>
+    <string name="plugin_description">Wallpapers from the MV Wallpapers collection on GitHub. Shows every wallpaper once in random order, then reshuffles.</string>
+    <string name="plugin_uuid">591ab8fb-3b38-4f5f-8571-559c96c73708</string>
+    <string name="manifest_url">https://raw.githubusercontent.com/markoman013/mv-wallpapers/main/manifest.json</string>
+
+    <string name="projectivy_not_installed">Warning, this plugin requires Projectivy Launcher which does not seem to be installed.</string>
+    <string name="settings">Settings</string>
+</resources>

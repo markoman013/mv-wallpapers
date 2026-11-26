@@ -1,0 +1,40 @@
+name: Clean repo history
+
+# Squashes the history to a few commits (old photo versions stop counting towards the repo size).
+# Pushed in parts, because GitHub refuses a single push over 2 GB.
+# Afterwards run "Clean up old plugin releases" once a new plugin build exists.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  squash:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Squash and push in parts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -q --orphan fresh
+          git rm -rq --cached .
+          parts=(
+            ":(exclude)wallpapers :(exclude)thumbs"
+            "wallpapers/art wallpapers/space thumbs"
+            "wallpapers/animals wallpapers/architecture wallpapers/sea"
+            "wallpapers"
+          )
+          n=0
+          for p in "${parts[@]}"; do
+            n=$((n+1))
+            if [ $n -eq 1 ]; then git add -A -- . ':(exclude)wallpapers' ':(exclude)thumbs'; else git add -A -- $p; fi
+            git commit -q -m "MV Wallpapers library, part $n (history cleaned) [skip ci]"
+            git push -q -f origin HEAD:main
+          done
+          git status --short | head

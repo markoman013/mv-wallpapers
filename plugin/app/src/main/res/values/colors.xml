@@ -1,0 +1,24 @@
+<resources>
+    <!-- Material 3 dark (baseline) tones -->
+    <color name="projectivy_icon_background">#2d3a8c</color>
+    <color name="app_background">#ff141218</color>
+    <color name="card_background">#ff211f26</color>
+    <color name="surface_high">#ff2b2930</color>
+    <color name="text_primary">#ffe6e0e9</color>
+    <color name="text_secondary">#ffcac4d0</color>
+    <color name="tonal">#ff4a4458</color>
+    <color name="on_tonal">#ffe8def8</color>
+    <color name="color_accent">#ff1d9e75</color>
+    <color name="focus_ring">#ffe6e0e9</color>
+    <color name="glow">#59d0bcff</color>
+    <color name="theme_bg_141218">#ff141218</color>
+    <color name="theme_bg_amber">#ff18130b</color>
+    <color name="theme_bg_green">#ff0f1510</color>
+    <color name="theme_bg_blue">#ff0f131b</color>
+    <color name="theme_bg_191113">#ff191113</color>
+    <!-- Chips: the same in every theme (the folder chip follows the theme). -->
+    <color name="chip_season">#E65C4300</color>
+    <color name="chip_on_season">#FFFFDF9E</color>
+    <color name="chip_tag">#E6004F52</color>
+    <color name="chip_on_tag">#FF9EF1F2</color>
+</resources>

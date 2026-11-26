@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Material 3 style card: image only, name and count underneath.
+     Focused: zooms to 1.1x with a glow; the others are slightly dimmed. -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:stateListAnimator="@animator/card_zoom">
+
+    <LinearLayout
+        android:id="@+id/body"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.mv.wallpapers.plugin.GlowFrame
+            android:layout_width="match_parent"
+            android:layout_height="118dp"
+                android:padding="6dp">
+
+            <ImageView
+                android:id="@+id/cover"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/image_bg"
+                android:scaleType="centerCrop" />
+
+            <ImageView
+                android:id="@+id/emptyIcon"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_gravity="center"
+                android:alpha="0.54"
+                android:src="@drawable/ic_empty"
+                android:visibility="gone" />
+
+            <!-- Season chip: bottom left, same size as the chips on photo tiles -->
+            <TextView
+                android:id="@+id/seasonChip"
+                android:layout_width="wrap_content"
+                android:layout_height="22dp"
+                android:layout_gravity="bottom|start"
+                android:layout_margin="8dp"
+                android:background="@drawable/chip_season_bg"
+                android:drawableLeft="@drawable/ic_chip_season"
+                android:drawablePadding="4dp"
+                android:drawableTint="@color/chip_on_season"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:paddingLeft="7dp"
+                android:paddingRight="8dp"
+                android:text="Season"
+                android:textColor="@color/chip_on_season"
+                android:textSize="11sp"
+                android:visibility="gone" />
+                    <!-- Edit multiple: marked or not (top left) -->
+        <ImageView
+            android:id="@+id/mark"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="top|start"
+            android:layout_margin="8dp"
+            android:src="@drawable/mark_off"
+            android:visibility="gone" />
+        </com.mv.wallpapers.plugin.GlowFrame>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="6dp"
+            android:paddingTop="4dp"
+            android:paddingRight="12dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:singleLine="true"
+                    android:textColor="@color/text_primary"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/count"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/check"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="6dp"
+                android:src="@drawable/check_full" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

@@ -1,0 +1,48 @@
+name: Clean up old plugin releases
+
+# Run by hand from the Actions tab: deletes every plugin release (and its tag)
+# except the newest one.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete all but the latest release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          LATEST=$(gh api "repos/$REPO/releases/latest" -q .tag_name)
+          echo "Keeping $LATEST"
+          gh api "repos/$REPO/releases?per_page=100" -q '.[].tag_name' | while read -r TAG; do
+            if [ "$TAG" != "$LATEST" ]; then
+              gh release delete "$TAG" --repo "$REPO" --yes --cleanup-tag && echo "Deleted $TAG"
+            fi
+          done
+
+      - name: Delete leftover plugin tags that have no release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          RELEASED=$(gh api "repos/$REPO/releases?per_page=100" -q '.[].tag_name')
+          gh api "repos/$REPO/git/refs/tags?per_page=100" -q '.[].ref' | sed 's#refs/tags/##' | grep '^plugin-v' | while read -r TAG; do
+            if ! echo "$RELEASED" | grep -qx "$TAG"; then
+              gh api -X DELETE "repos/$REPO/git/refs/tags/$TAG" && echo "Deleted leftover tag $TAG"
+            fi
+          done
+
+      - name: Point the kept release's tag at the current main (after a history clean-up the old commit would keep old photos counting)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          LATEST=$(gh api "repos/$REPO/releases/latest" -q .tag_name)
+          MAIN=$(gh api "repos/$REPO/git/ref/heads/main" -q .object.sha)
+          gh api -X PATCH "repos/$REPO/git/refs/tags/$LATEST" -f sha="$MAIN" -F force=true -q .object.sha && echo "$LATEST now at $MAIN"

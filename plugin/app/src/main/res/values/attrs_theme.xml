@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Colours that change with the colour theme (Settings → Colour theme). -->
+<resources>
+    <attr name="mvBackground" format="color" />
+    <attr name="mvSurface" format="color" />
+    <attr name="mvSurfaceTranslucent" format="color" />
+    <attr name="mvSurfaceHigh" format="color" />
+    <attr name="mvTonal" format="color" />
+    <attr name="mvTonalTranslucent" format="color" />
+    <attr name="mvOnTonal" format="color" />
+    <attr name="mvGlow" format="color" />
+</resources>

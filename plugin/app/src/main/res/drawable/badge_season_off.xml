@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Season off: gold square with the sun crossed out (hidden by the Seasonal photos setting). -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/badge_season_bg" />
+    <item android:drawable="@drawable/ic_season_off" android:left="3.5dp" android:top="3.5dp" android:right="3.5dp" android:bottom="3.5dp" />
+</layer-list>

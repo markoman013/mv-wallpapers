@@ -1,0 +1,110 @@
+<resources>
+    <style name="Theme.ProjectivyWallpaperProvider" parent="@android:style/Theme.DeviceDefault.NoActionBar.Fullscreen">
+        <item name="android:colorAccent">@color/color_accent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="mvBackground">#FF141218</item>
+        <item name="mvSurface">#FF211F26</item>
+        <item name="mvSurfaceTranslucent">#E6211F26</item>
+        <item name="mvSurfaceHigh">#FF2B2930</item>
+        <item name="mvTonal">#FF4A4458</item>
+        <item name="mvTonalTranslucent">#E64A4458</item>
+        <item name="mvOnTonal">#FFE8DEF8</item>
+        <item name="mvGlow">#FFD0BCFF</item>
+        <item name="android:windowBackground">@color/theme_bg_141218</item>
+    </style>
+    <style name="Theme.MV.Amber" parent="Theme.ProjectivyWallpaperProvider">
+        <item name="mvBackground">#FF18130B</item>
+        <item name="mvSurface">#FF261F15</item>
+        <item name="mvSurfaceTranslucent">#E6261F15</item>
+        <item name="mvSurfaceHigh">#FF31291D</item>
+        <item name="mvTonal">#FF5E4519</item>
+        <item name="mvTonalTranslucent">#E65E4519</item>
+        <item name="mvOnTonal">#FFFFDCA8</item>
+        <item name="mvGlow">#FFFFB845</item>
+        <item name="android:windowBackground">@color/theme_bg_amber</item>
+    </style>
+    <style name="Theme.MV.Green" parent="Theme.ProjectivyWallpaperProvider">
+        <item name="mvBackground">#FF0F1510</item>
+        <item name="mvSurface">#FF1A231C</item>
+        <item name="mvSurfaceTranslucent">#E61A231C</item>
+        <item name="mvSurfaceHigh">#FF242E26</item>
+        <item name="mvTonal">#FF33513A</item>
+        <item name="mvTonalTranslucent">#E633513A</item>
+        <item name="mvOnTonal">#FFCBF0CF</item>
+        <item name="mvGlow">#FF8BDD97</item>
+        <item name="android:windowBackground">@color/theme_bg_green</item>
+    </style>
+    <style name="Theme.MV.Blue" parent="Theme.ProjectivyWallpaperProvider">
+        <item name="mvBackground">#FF0F131B</item>
+        <item name="mvSurface">#FF1A202A</item>
+        <item name="mvSurfaceTranslucent">#E61A202A</item>
+        <item name="mvSurfaceHigh">#FF242B37</item>
+        <item name="mvTonal">#FF324A70</item>
+        <item name="mvTonalTranslucent">#E6324A70</item>
+        <item name="mvOnTonal">#FFD2E3FF</item>
+        <item name="mvGlow">#FF96C0FF</item>
+        <item name="android:windowBackground">@color/theme_bg_blue</item>
+    </style>
+    <style name="Theme.MV.Rose" parent="Theme.ProjectivyWallpaperProvider">
+        <item name="mvBackground">#FF191113</item>
+        <item name="mvSurface">#FF261D1F</item>
+        <item name="mvSurfaceTranslucent">#E6261D1F</item>
+        <item name="mvSurfaceHigh">#FF31282A</item>
+        <item name="mvTonal">#FF5D3F44</item>
+        <item name="mvTonalTranslucent">#E65D3F44</item>
+        <item name="mvOnTonal">#FFFFD9DE</item>
+        <item name="mvGlow">#FFFFB1C0</item>
+        <item name="android:windowBackground">@color/theme_bg_191113</item>
+    </style>
+    <style name="Theme.MV.Panel" parent="@android:style/Theme.DeviceDefault.Dialog.NoActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.5</item>
+        <item name="android:windowAnimationStyle">@style/MVSheetAnimation</item>
+    </style>
+    <!-- One line of photo info; scrolls sideways when it doesn't fit. -->
+    <style name="MVMetaLine">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:marqueeRepeatLimit">marquee_forever</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+    <style name="MVSheetAnimation" parent="">
+        <item name="android:windowEnterAnimation">@anim/sheet_in</item>
+        <item name="android:windowExitAnimation">@anim/sheet_out</item>
+    </style>
+    <!-- Every pop-up menu/dialog: same grey as the settings panel. -->
+    <style name="MVDialog" parent="@android:style/Theme.DeviceDefault.Dialog.Alert">
+        <item name="android:windowBackground">@drawable/dialog_bg</item>
+        <item name="android:colorBackground">?attr/mvSurface</item>
+        <item name="android:colorBackgroundFloating">?attr/mvSurface</item>
+        <item name="android:colorAccent">@color/color_accent</item>
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="android:textColorSecondary">@color/text_secondary</item>
+    </style>
+    <style name="MVTab" parent="MVPill">
+        <item name="android:background">@drawable/tab_bg</item>
+        <item name="android:textColor">@color/tab_text</item>
+        <item name="android:layout_marginLeft">4dp</item>
+    </style>
+    <style name="MVPill" parent="">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:background">@drawable/button_bg</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/button_text</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:drawablePadding">6dp</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:stateListAnimator">@animator/button_focus</item>
+        <item name="android:gravity">center_vertical|start</item>
+    </style>
+</resources>

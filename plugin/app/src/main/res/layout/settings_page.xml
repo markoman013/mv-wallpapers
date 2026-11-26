@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Settings tab: list on the left, choices on the right. No box around the
+     right side, just a thin divider; both columns start on the same line. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/settingsPage"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_marginTop="18dp"
+    android:layout_weight="1"
+    android:baselineAligned="false"
+    android:orientation="horizontal"
+    android:visibility="gone">
+
+    <ListView
+        android:id="@+id/settingsList"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.46"
+        android:divider="@null"
+        android:dividerHeight="6dp"
+        android:listSelector="@drawable/row_selector"
+        android:paddingRight="14dp"
+        android:scrollbars="none" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="28dp"
+        android:background="#ff2f2c35" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.54"
+        android:orientation="vertical"
+        android:paddingTop="10dp">
+
+        <TextView
+            android:id="@+id/detailTitle"
+            android:layout_width="match_parent"
+            android:paddingLeft="12dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_primary"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/detailText"
+            android:layout_width="match_parent"
+            android:paddingLeft="12dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:lineSpacingExtra="3dp"
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp" />
+
+        <ListView
+            android:id="@+id/settingsChoices"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="14dp"
+            android:divider="@null"
+            android:dividerHeight="6dp"
+            android:listSelector="@drawable/row_selector"
+            android:paddingRight="14dp"
+            android:scrollbars="none" />
+
+        <!-- Info under the buttons (Library settings). -->
+        <TextView
+            android:id="@+id/detailFooter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="18dp"
+            android:paddingBottom="12dp"
+            android:lineSpacingExtra="3dp"
+            android:paddingLeft="12dp"
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp"
+            android:visibility="gone" />
+    </LinearLayout>
+</LinearLayout>

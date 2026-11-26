@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Drawn on top of a card/photo. Stroke radius 10.5dp + half stroke (1.5dp)
+     = 10dp outer edge, the same radius the photo is clipped to (card_bg). -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_selected="true">
+        <shape android:shape="rectangle">
+            <stroke android:width="3dp" android:color="@color/focus_ring" />
+            <corners android:radius="10.5dp" />
+        </shape>
+    </item>
+    <item android:state_focused="true">
+        <shape android:shape="rectangle">
+            <stroke android:width="3dp" android:color="@color/focus_ring" />
+            <corners android:radius="10.5dp" />
+        </shape>
+    </item>
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <stroke android:width="3dp" android:color="@color/color_accent" />
+            <corners android:radius="10.5dp" />
+        </shape>
+    </item>
+    <item android:drawable="@android:color/transparent" />
+</selector>
